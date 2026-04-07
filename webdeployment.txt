@@ -1,0 +1,71 @@
+☁️ 2. Launch Virtual Machine (AWS EC2)
+Steps:
+Go to Amazon Web Services
+Open EC2 Dashboard
+Click Launch Instance
+Configure:
+AMI: Ubuntu 22.04
+Instance Type: t2.micro (free tier)
+Key Pair: create/download .pem
+Security Group:
+SSH → 22 (your IP)
+HTTP → 80 (Anywhere)
+Custom → 3000 (for Node app)
+
+Click Launch
+
+3. Connect to EC2
+
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install nodejs npm -y
+node -v
+npm -v
+
+sudo apt install git -y
+
+git clone https://github.com/basir/mern-amazona.git
+cd mern-amazona
+
+cd backend
+npm install
+
+nano .env
+
+npm start
+
+Runs on:
+
+http://ec2public-ip:5000
+
+
+cd mern-amazona/frontend
+npm install
+npm run dev -- --host
+
+Runs on:
+
+http://ec2public-ip:5173
+
+10. Configure Security Group (IMPORTANT)
+
+In EC2 → Security Groups:
+
+Add inbound rule:
+Port 3000 (frontend)
+Port 5000 (backend)
+
+On your EC2:
+
+sudo npm install -g pm2
+
+Check:
+
+pm2 -v
+
+cd ~/quizApplication/frontend
+pm2 start "npm run dev -- --host" --name frontend
+
+
+cd ~/quizApplication/backend
+pm2 start npm --name backend -- start
