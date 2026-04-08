@@ -1,0 +1,22 @@
+create two instances with security grups:
+same vpc 
+
+ssh anywhere
+all icmp ipv4 anywhere
+custom tcp port 8000 anywhere
+
+connect to both instances using instance connect
+
+ping the private ip addresses of both instances
+
+in one instance execute: 
+	create file.txt
+	nano file.txt
+	python -m http.server 8000
+
+in second instance execute:
+	wget http://172.31.46.128:8000/file.txt
+	ls
+	cat file.txt
+	
+
